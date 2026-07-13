@@ -1,0 +1,94 @@
+package model;
+
+import javax.xml.crypto.Data;
+import java.math.BigInteger;
+
+public class Reservation {
+    private BigInteger id ;
+    private String customerName;
+    private String customerPhone;
+    private BigInteger eventId;
+    private Integer ticketCount;
+    private Data reservationDate;
+    private String status;
+
+    public Reservation(BigInteger id, String customerName, String customerPhone, BigInteger eventId, Integer ticketCount, Data reservationDate, String status) {
+        this.id = id;
+        this.customerName = customerName;
+        this.customerPhone = customerPhone;
+        this.eventId = eventId;
+        this.ticketCount = ticketCount;
+        this.reservationDate = reservationDate;
+        this.status = status;
+    }
+
+    public BigInteger getId() {
+        return id;
+    }
+
+    public void setId(BigInteger id) {
+        this.id = id;
+    }
+
+    public String getCustomerName() {
+        return customerName;
+    }
+
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
+    }
+
+    public String getCustomerPhone() {
+        return customerPhone;
+    }
+
+    public void setCustomerPhone(String customerPhone) {
+        this.customerPhone = customerPhone;
+    }
+
+    public BigInteger getEventId() {
+        return eventId;
+    }
+
+    public void setEventId(BigInteger eventId) {
+        this.eventId = eventId;
+    }
+
+    public Integer getTicketCount() {
+        return ticketCount;
+    }
+
+    public void setTicketCount(Integer ticketCount) {
+        this.ticketCount = ticketCount;
+    }
+
+    public Data getReservationDate() {
+        return reservationDate;
+    }
+
+    public void setReservationDate(Data reservationDate) {
+        this.reservationDate = reservationDate;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Reservation{" +
+                "id=" + id +
+                ", customerName='" + customerName + '\'' +
+                ", customerPhone='" + customerPhone + '\'' +
+                ", eventId=" + eventId +
+                ", ticketCount=" + ticketCount +
+                ", reservationDate=" + reservationDate +
+                ", status='" + status + '\'' +
+                '}';
+    }
+}
