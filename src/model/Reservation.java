@@ -1,5 +1,8 @@
 package model;
 
+import enums.EventStatus;
+import enums.ReservationStatus;
+
 import javax.xml.crypto.Data;
 import java.math.BigInteger;
 
@@ -10,9 +13,9 @@ public class Reservation {
     private BigInteger eventId;
     private Integer ticketCount;
     private Data reservationDate;
-    private String status;
+    private ReservationStatus status;
 
-    public Reservation(BigInteger id, String customerName, String customerPhone, BigInteger eventId, Integer ticketCount, Data reservationDate, String status) {
+    public Reservation(BigInteger id, String customerName, String customerPhone, BigInteger eventId, Integer ticketCount, Data reservationDate, ReservationStatus status) {
         this.id = id;
         this.customerName = customerName;
         this.customerPhone = customerPhone;
@@ -70,11 +73,11 @@ public class Reservation {
         this.reservationDate = reservationDate;
     }
 
-    public String getStatus() {
+    public ReservationStatus getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(ReservationStatus status) {
         this.status = status;
     }
 
