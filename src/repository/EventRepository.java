@@ -1,0 +1,57 @@
+package repository;
+
+import databaseConnection.DatabaseConfig;
+import exceptions.EventException;
+import model.Event;
+
+import java.math.BigInteger;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
+public class EventRepository implements GenericRepository<Event> {
+
+
+    @Override
+    public void save(Event entity) {
+        String add = "INSERT INTO events (title , location , capacity , reserved_count , ticket_price , status) VALUES (?,?,?,?,?,?)";
+        try (Connection connection = DatabaseConfig.getConnection();
+             PreparedStatement ps = connection.prepareStatement(add)) {
+            ps.setString(1, entity.getTitle());
+            ps.setString(2, entity.getLocation());
+            ps.setInt(3, entity.getCapacity());
+            ps.setInt(4, entity.getReservedCount());
+            ps.setDouble(5, entity.getPrice());
+            ps.setString(6, entity.getStatus().toString());
+            int rows = ps.executeUpdate();
+            if (rows > 0) {
+                System.out.println(entity + " Has Been Saved Successfully");
+            }
+        } catch (SQLException e) {
+            throw new EventException("Event Did Not Saved Successfully");
+        }
+    }
+
+    @Override
+    public void update(Event e) {
+        String update = "";
+    }
+
+    @Override
+    public void delete(Event e) {
+
+    }
+
+    @Override
+    public Event findById(BigInteger id) {
+        return null;
+    }
+
+    @Override
+    public List<Event> findAll() {
+        return List.of();
+    }
+}
