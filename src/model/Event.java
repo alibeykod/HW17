@@ -3,6 +3,7 @@ package model;
 import enums.EventStatus;
 
 import java.math.BigInteger;
+import java.util.List;
 
 public class Event {
     private BigInteger id ;
@@ -12,6 +13,15 @@ public class Event {
     private Integer reservedCount;
     private double price;
     private EventStatus status;
+    private List<Event> eventList;
+
+    public List<Event> getEventList() {
+        return eventList;
+    }
+
+    public void setEventList(List<Event> eventList) {
+        this.eventList = eventList;
+    }
 
     public Event(BigInteger id, String title, String location, Integer capacity, Integer reservedCount, double price, EventStatus status) {
         this.id = id;
