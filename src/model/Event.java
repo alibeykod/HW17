@@ -21,5 +21,72 @@ public class Event {
         this.status = status;
     }
 
+    public BigInteger getId() {
+        return id;
+    }
 
+    public void setId(BigInteger id) {
+        this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public Integer getCapacity() {
+        return capacity;
+    }
+
+    public void setCapacity(Integer capacity) {
+        this.capacity = capacity;
+    }
+
+    public Integer getReservedCount() {
+        return reservedCount;
+    }
+
+    public void setReservedCount(Integer reservedCount) {
+        this.reservedCount = reservedCount;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    @Override
+    public String toString() {
+        return "Event{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", location='" + location + '\'' +
+                ", capacity=" + capacity +
+                ", reservedCount=" + reservedCount +
+                ", price=" + price +
+                ", status='" + status + '\'' +
+                '}';
+    }
 }
