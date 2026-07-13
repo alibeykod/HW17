@@ -37,7 +37,22 @@ public class EventRepository implements GenericRepository<Event> {
 
     @Override
     public void update(Event e) {
-        String update = "";
+        String update = "UPDATE events SET title=? , location=? , capacity=? , reserved_count=? , ticket_price=? , status=? WHERE id=?";
+        try (Connection connection = DatabaseConfig.getConnection();
+             PreparedStatement ps = connection.prepareStatement(update)){
+        ps.setString(1 , e.getTitle());
+        ps.setString(2 , e.getLocation());
+        ps.setInt(3 , e.getCapacity());
+        ps.setInt(4 , e.getReservedCount());
+        ps.setDouble(5 , e.getPrice());
+        ps.setString(6 , e.getStatus().toString());
+        int rows2 = ps.executeUpdate();
+        if (rows2 > 0 ){
+            System.out.println("Event Has Been Successfully");
+        }
+        }catch (SQLException ex){
+            throw new EventException("Event Did Not Update Successfully");
+        }
     }
 
     @Override
