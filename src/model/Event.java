@@ -1,5 +1,7 @@
 package model;
 
+import enums.EventStatus;
+
 import java.math.BigInteger;
 
 public class Event {
@@ -9,9 +11,9 @@ public class Event {
     private Integer capacity;
     private Integer reservedCount;
     private double price;
-    private String status;
+    private EventStatus status;
 
-    public Event(BigInteger id, String title, String location, Integer capacity, Integer reservedCount, double price, String status) {
+    public Event(BigInteger id, String title, String location, Integer capacity, Integer reservedCount, double price, EventStatus status) {
         this.id = id;
         this.title = title;
         this.location = location;
@@ -69,11 +71,11 @@ public class Event {
         this.price = price;
     }
 
-    public String getStatus() {
+    public EventStatus getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(EventStatus status) {
         this.status = status;
     }
 
