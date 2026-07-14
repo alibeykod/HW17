@@ -57,7 +57,16 @@ public class EventRepository implements GenericRepository<Event> {
 
     @Override
     public void delete(Event e) {
-
+        String delete = "DELETE FROM events WHERE id = ?";
+        try (Connection connection = DatabaseConfig.getConnection();
+        PreparedStatement ps = connection.prepareStatement(delete);
+        ){int rows3 = ps.executeUpdate();
+            if (rows3 > 0){
+                System.out.println("Event By Id : [" + e.getId()  + "] Has Been Deleted Succsessfully");
+            }
+        } catch (SQLException exx) {
+            throw new EventException("Event Did Not Deleted Successfully!!");
+        }
     }
 
     @Override
