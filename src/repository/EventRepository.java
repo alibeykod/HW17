@@ -1,12 +1,14 @@
 package repository;
 
 import databaseConnection.DatabaseConfig;
+import enums.EventStatus;
 import exceptions.EventException;
 import model.Event;
 
 import java.math.BigInteger;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -71,7 +73,28 @@ public class EventRepository implements GenericRepository<Event> {
 
     @Override
     public Event findById(BigInteger id) {
-        return null;
+        String findById = "SELECT * FROM events WHERE id = ?";
+        try(Connection connection = DatabaseConfig.getConnection();
+            PreparedStatement ps = connection.prepareStatement(findById)) {
+            ps.setObject(1 , id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()){
+                System.out.println("Event By Id : [" +rs.getObject("id") + "Has Been Found : ");
+
+                return new Event(
+                        (BigInteger) rs.getObject("id"),
+                        rs.getString("title"),
+                        rs.getString("location"),
+                        rs.getInt("capacity"),
+                        rs.getInt("reserved_count"),
+                        rs.getDouble("ticket_price"),
+                        EventStatus.valueOf(rs.getString("status"))
+                );
+            }throw new EventException("Event Not Found");
+
+        }catch (SQLException e) {
+            throw new EventException("Event Did Not Found ....");
+        }
     }
 
     @Override
