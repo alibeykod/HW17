@@ -99,6 +99,28 @@ public class EventRepository implements GenericRepository<Event> {
 
     @Override
     public List<Event> findAll() {
-        return List.of();
+        String findAll = "SELECT * FROM events ";
+        try (Connection connection = DatabaseConfig.getConnection();
+        PreparedStatement ps = connection.prepareStatement(findAll);
+        ){
+            List<Event> events = new ArrayList<>();
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()){
+                events.add(
+                        new Event(
+                                (BigInteger) rs.getObject("id"),
+                                rs.getString("title"),
+                                rs.getString("location"),
+                                rs.getInt("capacity"),
+                                rs.getInt("reserved_count"),
+                                rs.getDouble("ticket_price"),
+                                EventStatus.valueOf(rs.getString("status"))
+                        )
+                );
+            }
+            return events ;
+        }catch (SQLException e){
+            throw new EventException("there is no event to show");
+        }
     }
 }
