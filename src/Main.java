@@ -1,15 +1,45 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+import repository.EventRepository;
+import repository.ReservationRepository;
+
+import java.util.Scanner;
+
+
 public class Main {
     public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+        EventRepository ep = new EventRepository();
+        ReservationRepository rr = new ReservationRepository();
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
+        Scanner scanner = new Scanner(System.in);
+        boolean running = true;
+
+        while (running) {
+            System.out.println("\n1. Create Event");
+            System.out.println("2. Show All Events");
+            System.out.println("3. Update Event");
+            System.out.println("4. Cancel Event");
+            System.out.println("5. Create Reservation");
+            System.out.println("6. Cancel Reservation");
+            System.out.println("7. Show All Reservations");
+            System.out.println("8. Reports");
+            System.out.println("9. Exit");
+            System.out.print("Select an option: ");
+
+            String choice = scanner.nextLine();
+
+            switch (choice) {
+                case "1" -> System.out.println("Creating Event...");
+                case "2" -> System.out.println("Showing all events...");
+                case "3" -> System.out.println("Updating Event...");
+                case "4" -> System.out.println("Cancelling Event...");
+                case "5" -> System.out.println("Creating Reservation...");
+                case "6" -> System.out.println("Cancelling Reservation...");
+                case "7" -> System.out.println("Showing all reservations...");
+                case "8" -> System.out.println("Reports...");
+                case "9" -> running = false;
+                default -> System.out.println("Invalid choice!");
+            }
         }
+        scanner.close();
+    }
     }
 }

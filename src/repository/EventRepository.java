@@ -64,7 +64,7 @@ public class EventRepository implements GenericRepository<Event> {
         PreparedStatement ps = connection.prepareStatement(delete);
         ){int rows3 = ps.executeUpdate();
             if (rows3 > 0){
-                System.out.println("Event By Id : [" + e.getId()  + "] Has Been Deleted Succsessfully");
+                System.out.println("Event By Id : [" + e.getId()  + "] Has Been Deleted Successfully");
             }
         } catch (SQLException exx) {
             throw new EventException("Event Did Not Deleted Successfully!!");
