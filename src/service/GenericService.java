@@ -3,6 +3,8 @@ package service;
 import model.Event;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.util.List;
 
 public interface GenericService<T> {
     // a method to save:
@@ -13,12 +15,12 @@ public interface GenericService<T> {
 
 
     //to control delete methods :
-    void checkForDelete(T ch);
+    void checkForDelete(BigInteger id);
 
     //a method to control fin by id :
-    void checkForFindById(T ch);
+    T checkForFindById(BigInteger id);
 
     // a method to check for find all :
-    void checkForFindAll(T ch);
+    List<T> checkForFindAll(T ch);
 
 }
