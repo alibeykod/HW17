@@ -4,62 +4,72 @@ import exceptions.EventServiceException;
 import model.Event;
 import repository.EventRepository;
 
+import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.List;
+
 public class EventService implements GenericService<Event> {
-        EventRepository er = new EventRepository();
+    EventRepository er = new EventRepository();
 
 
     @Override
-    public int checkForSaveAndUpdate(Event ch) {
-        if (ch.getTitle() == null || ch.getTitle().isBlank()){
-            throw new EventServiceException("Event can not be null");
+    public void checkForSave(Event ch) {
+        if (ch.getTitle() == null || ch.getTitle().isBlank()) {
+            throw new EventServiceException("title can not be null !");
         }
-        if (ch.getCapacity() < 0 ){
-            throw new EventServiceException("Event capacity not be negative");
+        if (ch.getCapacity() <= 0) {
+            throw new EventServiceException("capacity can not be negative or zero ");
         }
-        if (ch.getPrice() < 0 ){
-            throw new EventServiceException("Event Ticket Price can not be negative");
+        if (ch.getPrice() < 0) {
+            throw new EventServiceException("ticket price can not be negative ");
+        } else {
+            er.save(ch);
         }
-        return 0;
     }
 
     @Override
-    public int checkForDelete(Event ch) {
-        if (ch.getTitle() == null || ch.getTitle().isBlank()){
-            throw new EventServiceException("Event can not be null");
+    public void checkForUpdate(Event ch) {
+        if (ch.getTitle() == null || ch.getTitle().isBlank()) {
+            throw new EventServiceException("title can not be null !");
         }
-        if (ch.getCapacity() < 0 ){
-            throw new EventServiceException("Event capacity not be negative");
+        if (ch.getCapacity() <= 0) {
+            throw new EventServiceException("capacity can not be negative or zero ");
         }
-        if (ch.getPrice() < 0 ){
-            throw new EventServiceException("Event Ticket Price can not be negative");
+        if (ch.getPrice() < 0) {
+            throw new EventServiceException("ticket price can not be negative ");
+        } else {
+            er.update(ch);
         }
-        return 0;
     }
 
     @Override
-    public int checkForFindById(Event ch) {
-        if (ch.getTitle() == null || ch.getTitle().isBlank()){
-            throw new EventServiceException("Event can not be null");
+    public void checkForDelete(BigInteger id) {
+        if (id.compareTo(BigInteger.ZERO) <= 0) {
+            throw new EventServiceException("this event not exist to delete !");
+        } else {
+            er.delete(id);
         }
-        if (ch.getCapacity() < 0 ){
-            throw new EventServiceException("Event capacity not be negative");
-        }
-        if (ch.getPrice() < 0 ){
-            throw new EventServiceException("Event Ticket Price can not be negative");
-        }
-        return 0;
     }
 
     @Override
-    public int checkForFindAll(Event ch) {
-        if (ch.getTitle() == null || ch.getTitle().isBlank()){
-            throw new EventServiceException("Event can not be null");
+    public Event checkForFindById(BigInteger id) {
+        if (id.compareTo(BigInteger.ZERO) <= 0){
+            throw new EventServiceException("id can not be zero or negative");
         }
-        if (ch.getCapacity() < 0 ){
-            throw new EventServiceException("Event capacity not be negative");
+        else {
+            return er.findById(id);
         }
-        if (ch.getPrice() < 0 ){
-            throw new EventServiceException("Event Ticket Price can not be negative");
+    }
+
+    @Override
+    public List<Event> checkForFindAll(Event ch) {
+        List<Event> events = new ArrayList<>();
+
+        for (Event e: er.findAll()){
+            if (e.getId().compareTo(BigInteger.ZERO) <= 0){
+                events.add(e);
+            }
         }
-        return 0;    }
+        return events;
+    }
 }
