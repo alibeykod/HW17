@@ -5,8 +5,12 @@ import model.Event;
 import java.math.BigDecimal;
 
 public interface GenericService<T> {
-    // a method to save and update :
-    void checkForSaveAndUpdate(T ch);
+    // a method to save:
+    void checkForSave(T ch);
+
+    // a method to save:
+    void checkForUpdate(T ch);
+
 
     //to control delete methods :
     void checkForDelete(T ch);
